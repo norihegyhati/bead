@@ -4,17 +4,18 @@ const kp = 25;
 const meret = 23;
 
 let eredmeny = 0;
-//let kigyo = [];
+
 let kigyo = [
-    [Math.floor((meret / 2)) * kp,
-    Math.floor((meret / 2)) * kp],
-    [Math.floor((meret / 2)) * kp,
-    Math.floor((meret / 2)) * kp - kp],
-    [Math.floor((meret / 2)) * kp,
-    Math.floor((meret / 2)) * kp - 2 * kp]
+    {x: Math.floor(meret / 2) * kp,
+    y: Math.floor(meret / 2) * kp},
+    {x: Math.floor(meret / 2) * kp,
+    y: Math.floor(meret / 2) * kp - kp},
+    {x: Math.floor(meret / 2) * kp,
+    y: Math.floor(meret / 2) * kp - 2 * kp}
 ]
-for (const kigyoTest of kigyo) {
-    console.log(kigyoTest);
+for (let i = 0; i < kigyo.length; i++) {
+    ctx.fillStyle = 'green';
+    ctx.fillRect(kigyo[i].x, kigyo[i].y, kp, kp);
 }
 
 //iranyok, mozgatas
@@ -60,17 +61,17 @@ function rajzolas() {
     let kigyoY = kigyo[0].y;
 
     if (ir == "LEFT")
-        kigyo[0].x -= kp;
+        kigyo[i].x -= kp;
     if (ir == "RIGHT")
-        kigyo[0].x += kp;
+        kigyo[i].x += kp;
     if (ir == "UP")
-        kigyo[0].y -= kp;
+        kigyo[i].y -= kp;
     if (ir == "DOWN")
-        kigyo[0].y += kp;
+        kigyo[i].y += kp;
 
 
     //kigyo eszik
-    if (kigyo[0].x == kaja.x && kigyo[0].y == kaja.y) {
+    if (kigyo[i].x == kaja.x && kigyo[i].y == kaja.y) {
         eredmeny += 1;
         kaja = {
             x: Math.floor(1 + (Math.random() * (meret - 1))) * kp,
