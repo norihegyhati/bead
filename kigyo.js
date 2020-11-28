@@ -4,15 +4,22 @@ const kp = 25;
 const meret = 23;
 
 let eredmeny = 0;
-let kigyo = [];
-
-kigyo[0] = {
-    x: Math.floor((meret / 2)) * kp,
-    y: Math.floor((meret / 2)) * kp
-};
+//let kigyo = [];
+let kigyo = [
+    [Math.floor((meret / 2)) * kp,
+    Math.floor((meret / 2)) * kp],
+    [Math.floor((meret / 2)) * kp,
+    Math.floor((meret / 2)) * kp - kp],
+    [Math.floor((meret / 2)) * kp,
+    Math.floor((meret / 2)) * kp - 2 * kp]
+]
+for (const kigyoTest of kigyo) {
+    console.log(kigyoTest);
+}
 
 //iranyok, mozgatas
 let ir;
+ir = "UP";
 var nyom = false;
 document.addEventListener('keydown', irany);
 
@@ -71,11 +78,33 @@ function rajzolas() {
         }
     }
 
-    //ide jönne az ütközés és a növekedés
+    //növekedés
+    let newHead = {
+        x: kigyoX,
+        y: kigyoY
+    };
+
+    function collision(head, array){
+		for(let i = 0; i < array.length; i++)
+		{
+			if(head.x == array[i].x && head.y == array[i].y)
+			{
+				return true;
+			}
+		}
+		return false;    
+    }
+    
+    if (kigyoX < kp || kigyoY < kp ||
+        collision(newHead, kigyo)) {
+        clearInterval(game);
+    }
+
+    kigyo.unshift(newHead);
 
     //alma rajzolasa
     ctx.fillStyle = 'red';
-    ctx.fillRect(kaja.x, kaja.y, kp/2, kp/2);
+    ctx.fillRect(kaja.x, kaja.y, kp / 2, kp / 2);
 
     //eredmeny
     ctx.fillStyle = 'black';
