@@ -88,7 +88,7 @@ function rajzolas() {
     //kigyo eszik
     if (kigyo[0].x == kaja.x && kigyo[0].y == kaja.y) {
         eredmeny += 1;
-        kigyo.unshift(newHead);
+ 
         kaja = {
             x: Math.floor(1 + (Math.random() * (meret - 1))) * kp,
             y: Math.floor(1 + (Math.random() * (meret - 1))) * kp
@@ -107,6 +107,7 @@ function rajzolas() {
                 return true;
             }
         }
+        
         return false;
     }
 
@@ -115,9 +116,12 @@ function rajzolas() {
         clearInterval(game);
     }
 
+    kigyo.unshift(newHead);
+
     //alma rajzolasa
     ctx.fillStyle = 'red';
     ctx.fillRect(kaja.x, kaja.y, kp / 2, kp / 2);
+    
 
     //eredmeny
     ctx.fillStyle = 'black';
@@ -125,6 +129,8 @@ function rajzolas() {
     ctx.clearRect(0, 0, 50, 25);
     ctx.fillText(eredmeny, kp, 0.8 * kp);
 
+    
 }
+
 
 let game = setInterval(rajzolas, 500);
