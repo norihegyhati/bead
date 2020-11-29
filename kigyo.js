@@ -8,7 +8,7 @@ let eredmeny = 0;
 let kigyo = [
     {
         x: Math.floor(meret / 2) * kp,
-        y: Math.floor(meret / 2) * kp,
+        y: Math.floor(meret / 2) * kp - 2 * kp,
         irany: "UP"
     },
     {
@@ -18,7 +18,7 @@ let kigyo = [
     },
     {
         x: Math.floor(meret / 2) * kp,
-        y: Math.floor(meret / 2) * kp - 2 * kp,
+        y: Math.floor(meret / 2) * kp,
         irany: "UP"
     }
 ]
@@ -121,11 +121,12 @@ function rajzolas() {
         ctx.fillRect(ujElem.x, ujElem.y, kp, kp)
     }
 
-    for (let i = 1; i < kigyo[i]; i++) {
-        if (kigyo[0].x == kigyo[i].x && kigyo[i].y == kigyo[0].y) {
+    //onmagaba utkozes
+    for (let j = 1; j < kigyo.length; j++) {
+        if (kigyo[0].x == kigyo[j].x && kigyo[0].y == kigyo[j].y) {
             clearInterval(game);
         }
-    };
+    }
 
     //10mp-kent gyorsulas
     let sebesseg = 500;
