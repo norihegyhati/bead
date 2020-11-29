@@ -4,6 +4,8 @@ const kp = 25;
 const meret = 23;
 
 let eredmeny = 0;
+let vege;
+vege = false;
 
 let kigyo = [
     {x: Math.floor(meret / 2) * kp,
@@ -21,7 +23,7 @@ for (let i = 0; i < kigyo.length; i++) {
 //iranyok, mozgatas
 let ir;
 ir = "UP";
-var nyom = false;
+//var nyom = false;
 document.addEventListener('keydown', irany);
 
 function irany(event) {
@@ -52,7 +54,7 @@ function rajzolas() {
 
     for (let i = 0; i < kigyo.length; i++) {
         ctx.fillStyle = 'green';
-        ctx.fillRect(kigyo[0].x, kigyo[0].y, kp, kp);
+        ctx.fillRect(kigyo[i].x, kigyo[i].y, kp, kp);
 
     }
 
@@ -60,19 +62,29 @@ function rajzolas() {
     let kigyoX = kigyo[0].x;
     let kigyoY = kigyo[0].y;
 
-    if (ir == "LEFT")
-        kigyo[i].x -= kp;
-    if (ir == "RIGHT")
-        kigyo[i].x += kp;
-    if (ir == "UP")
-        kigyo[i].y -= kp;
-    if (ir == "DOWN")
-        kigyo[i].y += kp;
+    if (ir == "LEFT") {
+        for(let i = 0; i < kigyo.length; i++) {
+            kigyo[0].x -= kp;   
+        }
+    } else if (ir == "RIGHT") {
+        for(let i = 0; i < kigyo.length; i++) {
+            kigyo[0].x += kp;
+        }
+    } else if (ir == "UP") {
+        for(let i = 0; i < kigyo.length; i++) {
+            kigyo[0].y -= kp;
+        }
+    } else if (ir == "DOWN") {
+        for(let i = 0; i < kigyo.length; i++) {
+            kigyo[0].y += kp;
+        }
+    }
 
 
     //kigyo eszik
-    if (kigyo[i].x == kaja.x && kigyo[i].y == kaja.y) {
+    if (kigyo[0].x == kaja.x && kigyo[0].y == kaja.y) {
         eredmeny += 1;
+        kigyo.unshift(newHead);
         kaja = {
             x: Math.floor(1 + (Math.random() * (meret - 1))) * kp,
             y: Math.floor(1 + (Math.random() * (meret - 1))) * kp
@@ -101,8 +113,6 @@ function rajzolas() {
         clearInterval(game);
     }
 
-    kigyo.unshift(newHead);
-
     //alma rajzolasa
     ctx.fillStyle = 'red';
     ctx.fillRect(kaja.x, kaja.y, kp / 2, kp / 2);
@@ -112,6 +122,16 @@ function rajzolas() {
     ctx.font = '24px Changa one';
     ctx.clearRect(0, 0, 50, 25);
     ctx.fillText(eredmeny, kp, 0.8 * kp);
+
+    
+if (vege) {
+    ctx.fillStyle = "red"
+    ctx.font = "60px Arial"
+    ctx.fillText("GAME OVER", meret / 2, meret / 2)
+    ctx.font = "20px Arial"
+    ctx.fillText("Press SPACE to start over!", meret / 2, meret / 2 + kp)
+
+  }
 
 }
 
