@@ -9,23 +9,19 @@ let kigyo = [
     {
         x: Math.floor(meret / 2) * kp,
         y: Math.floor(meret / 2) * kp,
-        direction: "UP"
+        irany: "UP"
     },
     {
         x: Math.floor(meret / 2) * kp,
         y: Math.floor(meret / 2) * kp - kp,
-        direction: "UP"
+        irany: "UP"
     },
     {
         x: Math.floor(meret / 2) * kp,
         y: Math.floor(meret / 2) * kp - 2 * kp,
-        direction: "UP"
+        irany: "UP"
     }
 ]
-//for (let i = 0; i < kigyo.length; i++) {
-//    ctx.fillStyle = 'green';
-//    ctx.fillRect(kigyo[i].x, kigyo[i].y, kp, kp);
-//}
 
 //iranyok, mozgatas
 let ir;
@@ -125,21 +121,18 @@ function rajzolas() {
         ctx.fillRect(ujElem.x, ujElem.y, kp, kp)
     }
 
+    for (let i = 1; i < kigyo[i]; i++) {
+        if (kigyo[0].x == kigyo[i].x && kigyo[i].y == kigyo[0].y) {
+            clearInterval(game);
+        }
+    };
 
-    //function collision(head, array) {
-    //    for (let i = 0; i < array.length; i++) {
-    //        if (head.x == array[i].x && head.y == array[i].y) {
-    //            return true;
-    //        }
-    //    }
-
-    //    return false;
-    //}
-
-    //if (kigyoX < kp || kigyoY < kp ||
-    //    collision(newHead, kigyo)) {
-    //    clearInterval(game);
-    //}
+    //10mp-kent gyorsulas
+    let sebesseg = 500;
+    setInterval(gyorsabb, 1000);
+    function gyorsabb() {
+        sebesseg = sebesseg * 1.1;
+    }
 
     //alma rajzolasa
     ctx.fillStyle = 'red';
@@ -150,7 +143,8 @@ function rajzolas() {
     ctx.fillStyle = 'black';
     ctx.font = '24px Changa one';
     ctx.clearRect(0, 0, 50, 25);
-    ctx.fillText(eredmeny, kp, 0.8 * kp);
+    ctx.fillText(`${eredmeny} pont`, kp, 0.8 * kp);
+
 }
 
 
